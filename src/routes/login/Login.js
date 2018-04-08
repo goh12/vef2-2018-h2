@@ -33,7 +33,6 @@ class Login extends Component {
     const { dispatch } = this.props;
     dispatch(logoutUser());
   }
-
   render() {
     const { username, password } = this.state;
     const { isFetching, isAuthenticated, message } = this.props;
@@ -51,9 +50,15 @@ class Login extends Component {
     }
 
     return (
-      <div>
+      <div className="login">
+        <h2 className="login__heading">Innskráning</h2>
+
         {message && (
-          <p>{message}</p>
+          <ul>{message.map((message, i) => (
+            <li key={i}>
+              {message.message}
+            </li>
+          ))}</ul>
         )}
 
         <form onSubmit={this.handleSubmit}>
@@ -68,7 +73,7 @@ class Login extends Component {
             <input id="password" type="password" name="password" value={password} onChange={this.handleInputChange} />
           </div>
 
-          <button disabled={isFetching}>Innskrá</button>
+          <button className='button' disabled={isFetching}>Innskrá</button>
         </form>
       </div>
     );
