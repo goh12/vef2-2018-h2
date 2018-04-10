@@ -50,7 +50,7 @@ class Login extends Component {
         <p>Skrái inn <em>{username}</em>...</p>
       );
     }
-
+    
     return (
       <div className="login">
         <h2 className="login__heading">Innskráning</h2>

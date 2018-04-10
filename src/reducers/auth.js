@@ -7,12 +7,12 @@ import {
 
 // Ef það er notandi í localStorage erum við með innskráðan notanda
 // hér gætum við líka sótt token
-const user = JSON.parse(localStorage.getItem('token') || 'null');
+const token = JSON.parse(localStorage.getItem('token') || 'null');
 
 const initialState = {
   isFetching: false,
-  isAuthenticated: user ? true : false,
-  user,
+  isAuthenticated: token ? true : false,
+  token,
 };
 
 export default (state = initialState, action) => {
@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
         ...state,
         isFetching: action.isFetching,
         isAuthenticated: action.isAuthenticated,
-        user: action.user,
+        token: action.token,
         message: action.message,
       };
     case LOGIN_FAILURE:
@@ -44,7 +44,7 @@ export default (state = initialState, action) => {
         ...state,
         isFetching: action.isFetching,
         isAuthenticated: action.isAuthenticated,
-        user: action.user,
+        token: action.token,
       }
     default:
       return state;

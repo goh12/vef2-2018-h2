@@ -34,6 +34,8 @@ function receiveLogin(user) {
 }
 
 function loginError(message) {
+  console.log(message);
+  
   return {
     type: LOGIN_FAILURE,
     isFetching: false,
@@ -81,7 +83,7 @@ export const loginUser = (username, password) => {
 
 export const logoutUser = () => {
   return async (dispatch) => {
-    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     dispatch(logout());
   }
 }
@@ -94,14 +96,15 @@ export const createUser = (username, password, name) => {
     try {
       register = await api.post('register', { username, password, name });
     } catch (e) {
-      return dispatch(loginError(e))
+      return dispatch(loginError([{ message: e}]));
     }
 
-    if (!register.result.token) {
-      // útfæra þ.a. allir errorar eru settir í fylki
-      // breytum þá aftur í map fallið inn í login
-      // eins og staðan er núna kemur aðeins inn einn error, ekki allir        
-      dispatch(loginError(register.result.error))
+    if (!register.result.token) {      
+      const errors = [];
+      register.result.errors.forEach(element => {
+        errors.push(element.message);
+      });     
+      dispatch(loginError(errors));
     }
 
     if (register.result.token) {

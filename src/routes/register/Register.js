@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 /* todo sækja actions frá ./actions */
+import './Register.css';
 
 class Register extends Component {
   state = {
@@ -34,6 +35,7 @@ class Register extends Component {
     const { dispatch } = this.props;
     dispatch(logoutUser());
   }
+
   render() {
     const { username, password, name } = this.state;
     const { isFetching, isAuthenticated, message } = this.props;
@@ -54,17 +56,13 @@ class Register extends Component {
       <div className="register">
         <h2 className="register__heading">Innskráning</h2>
 
-        {/*message && (
+        {message && (
           <ul>{message.map((message, i) => (
             <li key={i}>
-              {message.message}
+              {message}
             </li>
           ))}</ul>
-        )*/}
-        {message && (
-          <p>{message}</p>
         )}
-
 
         <form onSubmit={this.handleSubmit}>
 
