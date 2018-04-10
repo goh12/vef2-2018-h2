@@ -53,13 +53,17 @@ class Login extends Component {
       <div className="login">
         <h2 className="login__heading">Innskráning</h2>
 
-        {message && (
+        {/*message && (
           <ul>{message.map((message, i) => (
             <li key={i}>
               {message.message}
             </li>
           ))}</ul>
+        )*/}
+        {message && (
+          <p>{message}</p>
         )}
+
 
         <form onSubmit={this.handleSubmit}>
 

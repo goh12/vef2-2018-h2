@@ -7,7 +7,7 @@ import {
 
 // Ef það er notandi í localStorage erum við með innskráðan notanda
 // hér gætum við líka sótt token
-const user = JSON.parse(localStorage.getItem('user') || 'null');
+const user = JSON.parse(localStorage.getItem('token') || 'null');
 
 const initialState = {
   isFetching: false,

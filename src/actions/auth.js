@@ -64,13 +64,16 @@ export const loginUser = (username, password) => {
       return dispatch(loginError(e))
     }
 
-    if (!login.loggedin) {
-      dispatch(loginError(login.error))
+    if (!login.result.token) {
+      // útfæra þ.a. allir errorar eru settir í fylki
+      // breytum þá aftur í map fallið inn í login
+      // eins og staðan er núna kemur aðeins inn einn error, ekki allir        
+      dispatch(loginError(login.result.error))
     }
 
-    if (login.loggedin) {
-      const { user } = login;
-      localStorage.setItem('user', JSON.stringify(user));
+    if (login.result.token) {
+      const { token, user } = login.result;
+      localStorage.setItem('token', JSON.stringify(token));
       dispatch(receiveLogin(user));
     }
   }
