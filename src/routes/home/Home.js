@@ -8,9 +8,10 @@ class Home extends Component {
     /* todo birta mismunandi upplýsingar ef innskráður notandi eða ekki */
 
     return (
-      <div>
-        <p>Halló heimur!</p>
-        <p><Link to="/login">Innskráning</Link></p>
+      <div className="home">
+        <h2>Velkomin á bókasafnið</h2>
+        <p>Til að njóta bókasafnsins til fullnstu mælum við með að <Link to="/login">skrá sig inn</Link>.
+        Þangað til getur þú skoðað <Link to="/books">allar bækrunar</Link>.</p>
       </div>
     );
   }

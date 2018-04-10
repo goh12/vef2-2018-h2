@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loginUser, logoutUser } from '../../actions/auth';
+import { createUser, logoutUser } from '../../actions/auth';
 import { Link } from 'react-router-dom';
 
 
 /* todo sækja actions frá ./actions */
 
-import './Login.css';
-
-class Login extends Component {
+class Register extends Component {
   state = {
     username: '',
     password: '',
+    name: ''
   }
 
   handleInputChange = (e) => {
@@ -26,9 +25,9 @@ class Login extends Component {
     e.preventDefault();
 
     const { dispatch } = this.props;
-    const { username, password } = this.state;
+    const { username, password, name } = this.state;
 
-    dispatch(loginUser(username, password));
+    dispatch(createUser(username, password, name));
   }
 
   handleLogout = (e) => {
@@ -36,7 +35,7 @@ class Login extends Component {
     dispatch(logoutUser());
   }
   render() {
-    const { username, password } = this.state;
+    const { username, password, name } = this.state;
     const { isFetching, isAuthenticated, message } = this.props;
 
     if (isAuthenticated) {
@@ -47,13 +46,13 @@ class Login extends Component {
 
     if (isFetching) {
       return (
-        <p>Skrái inn <em>{username}</em>...</p>
+        <p>Bý til notenda <em>{username}</em>...</p>
       );
     }
 
     return (
-      <div className="login">
-        <h2 className="login__heading">Innskráning</h2>
+      <div className="register">
+        <h2 className="register__heading">Innskráning</h2>
 
         {/*message && (
           <ul>{message.map((message, i) => (
@@ -79,9 +78,14 @@ class Login extends Component {
             <input id="password" type="password" name="password" value={password} onChange={this.handleInputChange} />
           </div>
 
-          <button className='button' disabled={isFetching}>Innskrá</button>
+          <div>
+            <label htmlFor="name">Nafn:</label>
+            <input id="name" type="text" name="name" value={name} onChange={this.handleInputChange} />
+          </div>
+
+          <button className='button' disabled={isFetching}>Nýskrá</button>
         </form>
-        <p><Link to="register">Nýskráning</Link></p>
+        <p><Link to="login">Innskráning</Link></p>
       </div>
     );
   }
@@ -96,4 +100,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(Register);

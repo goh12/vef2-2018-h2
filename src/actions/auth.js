@@ -85,3 +85,29 @@ export const logoutUser = () => {
     dispatch(logout());
   }
 }
+
+export const createUser = (username, password, name) => {
+  return async (dispatch) => {
+    dispatch(requestLogin());
+
+    let register;
+    try {
+      register = await api.post('register', { username, password, name });
+    } catch (e) {
+      return dispatch(loginError(e))
+    }
+
+    if (!register.result.token) {
+      // útfæra þ.a. allir errorar eru settir í fylki
+      // breytum þá aftur í map fallið inn í login
+      // eins og staðan er núna kemur aðeins inn einn error, ekki allir        
+      dispatch(loginError(register.result.error))
+    }
+
+    if (register.result.token) {
+      const { token, user } = register.result;
+      localStorage.setItem('token', JSON.stringify(token));
+      dispatch(receiveLogin(user));
+    }
+  }
+}
