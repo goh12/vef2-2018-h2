@@ -1,0 +1,26 @@
+
+.booksid__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.booksid__item {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.booksid__item__title {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.booksid__nav-1 {
+    margin-top: 5rem;
+}
+
+.booksid__nav-2 {
+    margin-top: 3rem;
+}

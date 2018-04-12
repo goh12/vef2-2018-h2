@@ -17,6 +17,7 @@
 .books__nav {
     display: flex;
     flex-direction: row;
+    margin-top: 1rem;
 }
 
 .books__nav__page {
