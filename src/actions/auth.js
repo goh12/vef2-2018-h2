@@ -55,7 +55,7 @@ function logout() {
 
 /* todo async "thunk" fyrir tengingu við vefþjónustu */
 // Thunk!
-export const loginUser = (username, password) => {
+export const loginUser = (username, password) => {  
   return async (dispatch) => {
     dispatch(requestLogin());
 
@@ -99,7 +99,7 @@ export const createUser = (username, password, name) => {
       return dispatch(loginError([{ message: e}]));
     }
 
-    if (!register.result.token) {      
+    if (register.result.errors) {      
       const errors = [];
       register.result.errors.forEach(element => {
         errors.push(element.message);
@@ -107,10 +107,9 @@ export const createUser = (username, password, name) => {
       dispatch(loginError(errors));
     }
 
-    if (register.result.token) {
-      const { token, user } = register.result;
-      localStorage.setItem('token', JSON.stringify(token));
-      dispatch(receiveLogin(user));
+    if (register.result.username) {
+      // ath! væri ekki sniðugast að logga notenda inn hér?
+      dispatch(receiveLogin());
     }
   }
 }
