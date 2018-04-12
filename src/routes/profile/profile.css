@@ -15,3 +15,7 @@
 .profile__form {
   margin: 20px 0;
 }
+
+.profile__form * {
+  margin: 5px;
+}

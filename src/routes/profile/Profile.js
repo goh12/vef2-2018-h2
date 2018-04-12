@@ -34,6 +34,22 @@ export default class Profile extends Component {
     })
   }
 
+  async updateLocalUser() {
+    const results = await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me`,
+      {
+        method: 'get',
+        headers: {
+          'Host': 'vef2-2018-h1-synilausn-fgg.herokuapp.com',
+          'Authorization': `bearer ${this.state.token}`,
+        }
+      });
+
+      const res = await results.json();
+      console.log(res);
+      localStorage.setItem('user', JSON.stringify(res));
+      window.location = '/profile';
+  }
+
   async updateImage() {
     try {
       const data = this.state.imageUpload;
@@ -58,19 +74,7 @@ export default class Profile extends Component {
         return this.setState({...this.state, error: res.error});
       }
 
-      const results2 = await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me`,
-      {
-        method: 'get',
-        headers: {
-          'Host': 'vef2-2018-h1-synilausn-fgg.herokuapp.com',
-          'Authorization': `bearer ${this.state.token}`,
-        }
-      });
-
-      const res2 = await results2.json();
-      console.log(res2);
-      localStorage.setItem('user', JSON.stringify(res2));
-      window.location = '/profile';
+      this.updateLocalUser();
     } catch(e) {
       console.log(e);
     }
@@ -78,8 +82,6 @@ export default class Profile extends Component {
   }
 
   async updatePassword() {
-    /* Þarf að gera password '' útfa galla í API í sýnilausn Óla */
-
     const json = {
       name: this.state.user.name,
       password: this.state.newPassowrd,
@@ -87,8 +89,8 @@ export default class Profile extends Component {
 
     const results = await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me`,
       {
-        method: 'patch',
-        body: json,
+        method: 'PATCH',
+        body: JSON.stringify(json),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -101,17 +103,16 @@ export default class Profile extends Component {
   }
 
   async updateName() {
-    /* Þarf að gera password '' útfa galla í API í sýnilausn Óla */
-
+    /* Þarf að gera password '123456' útfa galla í API í sýnilausn Óla */
     const json = {
       name: this.state.newName,
-      password: ''
+      password: '123456'
     }
 
     const results = await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me`,
       {
-        method: 'patch',
-        body: json,
+        method: 'PATCH',
+        body: JSON.stringify(json),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -121,6 +122,7 @@ export default class Profile extends Component {
       });
 
     const res = await results.json();
+    this.updateLocalUser();
   }
 
   handleImageInputChange(e) {
@@ -174,8 +176,19 @@ export default class Profile extends Component {
             e.preventDefault();
             this.updateName()}
           }/>
+          <p>* Vegna galla í sýnilausn Óla þarf að breyta passwordi eftir að breytt er nafni</p>
         </form>
 
+
+        <form className='profile__form' method='patch'>
+          <label>Lykilorð:</label>
+          <input type='password' onChange={(e) => this.handlePasswordInputChange(e)} />
+          <br />
+          <Button  children='Uppfæra lykilorð' onClick={(e) => {
+            e.preventDefault();
+            this.updatePassword()}
+          }/>
+        </form>
 
         <ReadBooks id='me' token={this.state.token} />
       </div>
