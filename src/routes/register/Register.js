@@ -56,13 +56,13 @@ class Register extends Component {
       <div className="register">
         <h2 className="register__heading">Innskráning</h2>
 
-        {message && (
+        {typeof(message) == "object" ? (
           <ul>{message.map((message, i) => (
             <li key={i}>
               {message}
             </li>
           ))}</ul>
-        )}
+        ) : ('')}
 
         <form onSubmit={this.handleSubmit}>
 

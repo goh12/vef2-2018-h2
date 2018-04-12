@@ -62,9 +62,9 @@ class Login extends Component {
             </li>
           ))}</ul>
         )*/}
-        {message && (
+        {typeof(message) == "string" ? (
           <p>{message}</p>
-        )}
+        ) : ('') }
 
 
         <form onSubmit={this.handleSubmit}>
