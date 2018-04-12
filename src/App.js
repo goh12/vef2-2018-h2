@@ -18,7 +18,7 @@ import './App.css';
 class App extends Component {
 
   render() {
-    const authenticated = JSON.parse(localStorage.getItem('token') || false); /* vita hvort notandi sé innskráður */
+    const authenticated = localStorage.getItem('token') || false; /* vita hvort notandi sé innskráður */
 
     return (
       <main className="main">

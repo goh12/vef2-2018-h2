@@ -35,13 +35,14 @@ class Login extends Component {
     const { dispatch } = this.props;
     dispatch(logoutUser());
   }
+
   render() {
     const { username, password } = this.state;
     const { isFetching, isAuthenticated, message } = this.props;
 
     if (isAuthenticated) {
       return (
-        <button onClick={this.handleLogout}>Útskrá</button>
+        <p style={{margin: '4em auto'}}>Innskráning tókst</p>
       );
     }
 

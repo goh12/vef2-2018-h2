@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Button from '../button';
 
 import './Header.css';
+import LoggedIn from '../logged-in';
 
 class Header extends Component {
 
@@ -14,6 +15,9 @@ class Header extends Component {
   }
 
   render() {
+    let user = localStorage.getItem('user');
+    user = user ? JSON.parse(user) : null;
+
     return (
       <header className="header">
         <h1 className="header__heading"><Link to="/">Bókasafnið</Link></h1>
@@ -21,7 +25,11 @@ class Header extends Component {
         {/* ætti samt frekar heima í sér component */}
         <Button onClick={this.onClick}>Leita</Button>
 
+        {user ? 
+        <LoggedIn user={user} /> :
         <Link to="/login">Innskráning</Link>
+        }
+        
       </header>
     );
   }

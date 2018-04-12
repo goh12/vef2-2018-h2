@@ -75,7 +75,7 @@ export const loginUser = (username, password) => {
 
     if (login.result.token) {
       const { token, user } = login.result;
-      localStorage.setItem('token', JSON.stringify(token));
+      localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
       dispatch(receiveLogin(user));
     }
