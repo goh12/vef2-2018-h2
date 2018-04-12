@@ -1,0 +1,22 @@
+
+.booksid__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.booksid__item {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.booksid__item__title {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.booksid__nav {
+    display: flex;
+}
