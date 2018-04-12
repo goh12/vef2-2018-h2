@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import api from '../../api';
-import Button from '../../components/button'
 
 import './BooksId.css';
 
@@ -45,7 +44,6 @@ export default class BooksId extends Component {
         if (error) {
             return(<p>Villa við að sækja bók</p>);
         }
-        console.log(data.result);
         
         return (
         <div className='booksid'>
@@ -76,14 +74,17 @@ export default class BooksId extends Component {
                        Tungumál: {data.result.language}
                     </li>
                     <li className='booksid__item' key='link'>
-                       <Link to=''>Breyta bók</Link>
+                       <Link to={`/books/${data.result.id}/edit`}>Breyta bók</Link>
                     </li>
                 </ul>
             )}
-            <div className='booksid__nav'>
-                <Link className='button booksid__button' to='/boooks/new'>Skrá lestur</Link>
+            <div className='booksid__nav-1'>
+                <Link className='button' to='/books/new'>Skrá lestur</Link>
+            </div>
+            <div className='booksid__nav-2'>
                 <Link className='button' to='/books'>Til baka</Link>
             </div>
+
         </div>
         );
     } 

@@ -65,19 +65,21 @@ export default class Books extends Component {
         if (error) {
             return(<p>Villa við að sækja bækur</p>);
         }
-        
+                
         return (
         <div className='books'>
             <h2>Bækur</h2>
             {data.result.items && (
                 <ul className='books__container'>{data.result.items.map((book, i) => (
                     <li className='books__item' key={book.title}>
-                        <div className='books__item__title'>
-                        {book.title}
-                        </div>
-                        <div className='books_item_author'>
-                        {book.author}
-                        </div>
+                        <Link to={`/books/${book.id}`}>
+                            <div className='books__item__title'>
+                            {book.title}
+                            </div>
+                            <div className='books_item_author'>
+                            {book.author}
+                            </div>
+                        </Link>
                     </li>
                 ))}</ul>
             )}

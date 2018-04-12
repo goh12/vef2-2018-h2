@@ -17,6 +17,10 @@
     text-decoration: underline;
 }
 
-.booksid__nav {
-    display: flex;
+.booksid__nav-1 {
+    margin-top: 5rem;
+}
+
+.booksid__nav-2 {
+    margin-top: 3rem;
 }
