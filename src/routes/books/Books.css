@@ -1,0 +1,24 @@
+.books__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.books__item {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.books__item__title {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.books__nav {
+    display: flex;
+    flex-direction: row;
+}
+
+.books__nav__page {
+    margin: 10px;
+}
