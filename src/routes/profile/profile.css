@@ -11,3 +11,7 @@
 .profile__name {
   display: inline-block;
 }
+
+.profile__form {
+  margin: 20px 0;
+}

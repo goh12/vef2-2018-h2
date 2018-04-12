@@ -27,7 +27,7 @@ class Header extends Component {
 
         {user ? 
         <LoggedIn user={user} /> :
-        <Link to="/login">Innskráning</Link>
+        <Button children="Innskráning" onClick={() => window.location = '/login'} >Innskráning</Button>
         }
         
       </header>

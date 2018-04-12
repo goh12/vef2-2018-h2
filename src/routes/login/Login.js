@@ -41,9 +41,7 @@ class Login extends Component {
     const { isFetching, isAuthenticated, message } = this.props;
 
     if (isAuthenticated) {
-      return (
-        <p style={{margin: '4em auto'}}>Innskráning tókst</p>
-      );
+      return window.location = '/';
     }
 
     if (isFetching) {
