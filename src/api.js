@@ -8,15 +8,17 @@ async function get(endpoint) {
   const url = `${baseurl}${endpoint}`;
 
   const options = {
+    method: 'GET',
     headers: {},
   };
 
   if (token) {
-    options.headers['Authorization'] = `Bearer ${token}`;
+    // fjarlægjum gæsalappir úr token með Regex
+    options.headers['Authorization'] = `Bearer ${token.replace(/['"]+/g, '')}`;
   }
-
+  
   /* todo framkvæma get */
-  const response = await fetch(url);
+  const response = await fetch(url, options);
 
   const result = await response.json();
 
@@ -38,7 +40,6 @@ async function post(endpoint, data) {
   const response = await fetch(url, options);
 
   const result = await response.json();
-  console.log(result);
   
   return { result, status: response.status };
 }
