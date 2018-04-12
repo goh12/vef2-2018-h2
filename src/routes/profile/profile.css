@@ -1,0 +1,13 @@
+.profile {
+  margin: 2em 0;  
+}
+
+.profile__image {
+  width: 4em;
+  height: 4em;
+  border-radius: 2em;
+}
+
+.profile__name {
+  display: inline-block;
+}
