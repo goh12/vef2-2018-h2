@@ -33,26 +33,6 @@ export default class BooksId extends Component {
             this.setState({ error: true, loading: false });            
         }
     }
-
-    clickHandlerNext = () => {
-        return (e) => {
-          e.preventDefault();
-
-          const { page } = this.state;
-
-          this.setState({ page: page+1 })
-        }
-    }
-
-    clickHandlerBack = () => {
-        return (e) => {
-          e.preventDefault();
-
-          const { page } = this.state;
-
-          this.setState({ page: page-1 })
-        }
-    }
     
     render() {
         
@@ -101,7 +81,7 @@ export default class BooksId extends Component {
                 </ul>
             )}
             <div className='booksid__nav'>
-                <Link className='button' to='/boooks/new'>Skrá lestur</Link>
+                <Link className='button booksid__button' to='/boooks/new'>Skrá lestur</Link>
                 <Link className='button' to='/books'>Til baka</Link>
             </div>
         </div>
