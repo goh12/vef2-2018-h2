@@ -1,0 +1,24 @@
+.users__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.users__item {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.users__item__title {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.users__nav {
+    display: flex;
+    flex-direction: row;
+}
+
+.users__nav__page {
+    margin: 10px;
+}

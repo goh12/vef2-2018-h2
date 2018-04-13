@@ -1,2 +1,2 @@
-import BooksId from './BooksId';
+import BooksId from './BooksId.js';
 export default BooksId;

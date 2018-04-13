@@ -15,6 +15,7 @@ import Books from './routes/books';
 import BooksId from './routes/booksid';
 import BooksIdEdit from './routes/booksidedit';
 import Users from './routes/users';
+import Userid from './routes/user-id';
 /* todo fleiri routes */
 
 import './App.css';
@@ -40,6 +41,7 @@ class App extends Component {
             <UserRoute path="/books/:id/edit" authenticated={authenticated} component={BooksIdEdit} />
             <Route path="/books/:id" component={BooksId} />
             <UserRoute path="/users" authenticated={authenticated} component={Users} />
+            <Route path="/user/:id" component={Userid} />
             {/* todo fleiri route */}
             <Route component={NotFound} />
           </Switch>

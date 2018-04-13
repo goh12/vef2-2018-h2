@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from '../button';
 
 import './read-books.css';
 
@@ -27,7 +28,6 @@ export default class ReadBooks extends Component {
         'Authorization': `bearer ${this.props.token}`,
       }
     });
-
     const read = await results.json();
     
     if(read.error) {
@@ -46,6 +46,25 @@ export default class ReadBooks extends Component {
       items: read.items,
     });
   }
+  
+  async deleteReview(e, id) {
+    try {
+      const results = await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me/read/${id}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Origin': '',
+            'Host': 'vef2-2018-h1-synilausn-fgg.herokuapp.com',
+            'Authorization': `bearer ${this.props.token}`,
+          }
+        });
+        this.getReadBooks();
+    } catch (err) {
+      console.log(err);
+    } 
+  }
 
   componentDidMount() {
       this.getReadBooks();
@@ -63,14 +82,19 @@ export default class ReadBooks extends Component {
     }
 
     const { items } = this.state;
-    if (items.length > 1) {
+    if (items.length > 0) {
       return (
         <ul>
           {items.map((book) => {
             return (
-              <React.Fragment>
-              <li>book.title</li>
-              <li>book.review</li>
+              <React.Fragment key={book.id}>
+              <li>
+              <h3>{book.title} - {book.rating}</h3>
+              <p>{book.review}</p>
+              </li>
+              {this.props.id == 'me' && (
+                <Button className='button' children='Eyða' onClick={async (e) => this.deleteReview(e, book.id)} />
+              )}
               </React.Fragment>
             )
           })}
