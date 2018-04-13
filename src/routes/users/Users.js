@@ -71,11 +71,15 @@ export default class Users extends Component {
             <h2>Notendur</h2>
             {data.result.items && (
                 <ul className='users__container'>{data.result.items.map((user,i) => (
+                  
                     <li className='users__item' key={i}>
+                        <Link to={`/users/${user.id}`}>
                         <div className='users__item__title'>
                         {user.name}
                         </div>
+                        </Link>
                     </li>
+                  
                 ))}</ul>
             )}
             <div className='users__nav'>

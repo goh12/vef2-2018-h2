@@ -16,7 +16,6 @@ export default class ReadBooks extends Component {
   }
 
   async getReadBooks() {
-    console.log("Hellos");
     const results = await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/${this.props.id}/read?offset=${this.state.offset}`,
     {
       method: 'GET',
@@ -25,7 +24,7 @@ export default class ReadBooks extends Component {
         'Content-Type': 'application/json',
         'Origin': '',
         'Host': 'vef2-2018-h1-synilausn-fgg.herokuapp.com',
-        'Authorization': `bearer ${this.props.token}`,
+        'Authorization': `bearer ${this.props.token || localStorage.getItem('token')}`,
       }
     });
     const read = await results.json();
