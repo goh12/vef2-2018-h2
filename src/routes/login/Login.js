@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser, logoutUser } from '../../actions/auth';
 import { Link } from 'react-router-dom';
+import Button from '../../components/button'
 
 
 /* todo sækja actions frá ./actions */
@@ -71,7 +72,7 @@ class Login extends Component {
             <input id="password" type="password" name="password" value={password} onChange={this.handleInputChange} />
           </div>
 
-          <button className='button' disabled={isFetching}>Innskrá</button>
+          <Button className='button' children='Innskrá' disabled={isFetching} />
         </form>
         <p><Link to="register">Nýskráning</Link></p>
       </div>

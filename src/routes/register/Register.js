@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createUser, logoutUser } from '../../actions/auth';
 import { Link } from 'react-router-dom';
-
+import Button from '../../components/button'
 
 /* todo sækja actions frá ./actions */
 import './Register.css';
@@ -81,7 +81,7 @@ class Register extends Component {
             <input id="name" type="text" name="name" value={name} onChange={this.handleInputChange} />
           </div>
 
-          <button className='button' disabled={isFetching}>Nýskrá</button>
+          <Button className='button' children='Nýskrá' disabled={isFetching} />
         </form>
         <p><Link to="login">Innskráning</Link></p>
       </div>
