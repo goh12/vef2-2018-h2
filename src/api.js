@@ -44,7 +44,35 @@ async function post(endpoint, data) {
   return { result, status: response.status };
 }
 
+async function patch(endpoint, data) {
+  const url = `${baseurl}${endpoint}`;
+
+  const token = window.localStorage.getItem('token');
+  
+  const options = {
+
+    method: 'PATCH',
+    body: JSON.stringify(data),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Host': 'vef2-2018-h1-synilausn-fgg.herokuapp.com',
+    }
+  };
+
+  if (token) {
+    options.headers['Authorization'] = `Bearer ${token.replace(/['"]+/g, '')}`;
+  }
+
+  const response = await fetch(url, options);
+
+  const result = await response.json();
+
+  return { result, status: response.status };
+}
+
 export default {
   get,
-  post
+  post,
+  patch
 };
