@@ -1,0 +1,12 @@
+.search {
+    display: flex;
+    flex-direction: row;
+}
+
+.search__input {
+    padding: 5px;
+}
+
+.search__button {
+    margin: 10px;
+}
