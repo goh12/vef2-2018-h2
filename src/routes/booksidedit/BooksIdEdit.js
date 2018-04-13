@@ -10,18 +10,33 @@ export default class BooksIdEdit extends Component {
     state = {
         data: null,
         loading: true,
+        categories: null,
+        patched: false
       }
       
     async componentDidMount() {
-        const { id } = this.props.match.params
-        this.fetchBook(id);
+        const { id } = this.props.match.params;
+        await this.fetchData(id);
     }
       
-    fetchBook = async (id) => {
+    fetchData = async (id) => {
         try {
             const data = await api.get(`books/${id}`);
-            this.setState({ data, loading: false });
-                        
+            const { result } = data;
+            const categories = await api.get('categories?limit=1000');
+            this.setState({ 
+                title: result.title, 
+                author: result.author, 
+                description: result.description, 
+                category: result.category, 
+                categorytitle: result.categorytitle, 
+                isbn10: result.isbn10, 
+                isbn13: result.isbn13,
+                published: result.published, 
+                pagecount: result.pagecount, 
+                language: result.language, 
+                categories, 
+                loading: false });
             if (data.result.error) {
                 this.setState({ error: true });
             }
@@ -34,7 +49,7 @@ export default class BooksIdEdit extends Component {
 
     handleInputChange = (e) => {
         const { name, value } = e.target;
-    
+                
         if (name) {
           this.setState({ [name]: value });
         }
@@ -42,13 +57,57 @@ export default class BooksIdEdit extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        
-      }
-    
-    render() {
-        
-        const { data, loading, error } = this.state;
 
+        const { title, 
+            author, 
+            description, 
+            category, 
+            isbn10, 
+            published, 
+            pagecount, 
+            language, 
+            isbn13 } = this.state;        
+        
+        const options = {
+            title,
+            author,
+            description,
+            category,
+            isbn10,
+            published,
+            pagecount,
+            language,
+            isbn13
+        };
+
+        const { id } = this.props.match.params;
+        const response = await api.patch(`books/${id}`, options);
+
+        if (response.result.errors) {
+            this.setState({ patchErrors: response.result.errors });
+        } else {
+            this.setState({ patched: true});
+        }
+    }
+    
+    render() {        
+        const { title, 
+            author, 
+            description, 
+            categorytitle,
+            category, 
+            isbn10, 
+            published, 
+            pagecount, 
+            language, 
+            isbn13, 
+            loading, 
+            error, 
+            categories,
+            patched,
+            patchErrors } = this.state;
+        const { id } = this.props.match.params;    
+        
         if (loading) {
             return(<p>Sæki bók ...</p>);
         }
@@ -57,58 +116,84 @@ export default class BooksIdEdit extends Component {
             return(<p>Villa við að sækja bók</p>);
         }
         
-        return (
-        <div className='booksid'>
-            {data.result && (
-                <ul className='booksid__container'>
-                    <li className='booksid__item__title' key={data.result.title}>
-                        {data.result.title}                       
-                    </li>
-                    <li className='booksid__item' key={data.result.author}>
-                       Eftir {data.result.author}
-                    </li>
-                    <li className='booksid__item' key={data.result.isbn13}>
-                       ISBN13 {data.result.isbn13}
-                    </li>
-                    <li className='booksid__item' key={data.result.categorytitle}>
-                       {data.result.categorytitle}
-                    </li>
-                    <li className='booksid__item' key={data.result.description}>
-                       {data.result.description}
-                    </li>
-                    <li className='booksid__item' key={data.result.pagecount}>
-                       {data.result.pagecount} síður
-                    </li>
-                    <li className='booksid__item' key={data.result.published}>
-                        Gefin út {data.result.published}
-                    </li>
-                    <li className='booksid__item' key={data.result.language}>
-                       Tungumál: {data.result.language}
-                    </li>
-                    <li className='booksid__item' key='link'>
-                       <Link to={`/books/${data.result.id}/edit`}>Breyta bók</Link>
-                    </li>
-                </ul>
-            )}
-            <div className='booksid__nav-1'>
-                <Link className='button' to='/books/new'>Skrá lestur</Link>
-            </div>
-            <div className='booksid__nav-2'>
-                <Link className='button' to='/books'>Til baka</Link>
-            </div>
-            <form onSubmit={this.handleSubmit}>
+        if (patched) {
+            return(
                 <div>
-                    <label htmlFor="title">Titell:</label>
-                    <input id="title" type="text" name="title" value={data.result.title} onChange={this.handleInputChange} />
+                    <p>Bók breytt!</p>
+                    <Link to={`/books/${id}`}>Skoða bók</Link>
+                </div>
+            );
+        }
+        
+        return (
+        <div className='booksidedit'>
+            <h2 className='booksidedit__title'>Breyta bók</h2>
+            {patchErrors ? (
+                <ul>{patchErrors.map((patcherror, i) => (
+                    <li key={patcherror.field}>
+                        {patcherror.message}
+                    </li>
+                ))}</ul>
+            ) : ('')}
+            <form onSubmit={this.handleSubmit}>
+                <div className='booksidedit__container'>
+                    <label className='booksidedit__label' htmlFor='title'>Title:</label>
+                    <input className='booksidedit__input' id='title' type='text' name='title' value={title} onChange={this.handleInputChange} />
+                </div>
+
+                <div className='booksidedit__container'>
+                    <label className='booksidedit__label' htmlFor='author'>Höfundur:</label>
+                    <input className='booksidedit__input' id='author' type='text' name='author' value={author} onChange={this.handleInputChange} />
                 </div>
 
                 <div>
-                    <label htmlFor="author">Lykilorð:</label>
-                    <input id="author" type="text" name="author" value={data.result.author} onChange={this.handleInputChange} />
+                    <label className='booksidedit__label' htmlFor='description'>Lýsing:</label>
+                    <textarea className='booksidedit__textarea' rows='7' cols='80' id='description' name='description' value={description} onChange={this.handleInputChange} />
+                </div>
+
+                <div className='booksidedit__container'>
+                    <label className='booksidedit__label' htmlFor='category'>Flokkur:</label>
+                    {typeof(categories) === "object" ? (
+                    <select name='category' value={category} onChange={this.handleInputChange} className='booksidedit__input'>
+                    {categories.result.items.map((category, i) => (
+                        <option value={category.id} key={i}>
+                            {category.title}
+                        </option>
+                    ))}
+                    </select>
+                    ) : ('')}
+                </div>
+
+                <div className='booksidedit__container'>
+                    <label className='booksidedit__label' htmlFor='isbn10'>ISBN10:</label>
+                    <input className='booksidedit__input' id='isbn10' type='text' name='isbn10' value={isbn10} onChange={this.handleInputChange} />
+                </div>
+
+                <div className='booksidedit__container'>
+                    <label className='booksidedit__label' htmlFor='isbn13'>ISBN13:</label>
+                    <input className='booksidedit__input' id='isbn13' type='text' name='isbn13' value={isbn13} onChange={this.handleInputChange} />
+                </div>
+
+                <div className='booksidedit__container'>
+                    <label className='booksidedit__label' htmlFor='published'>Útgefin:</label>
+                    <input className='booksidedit__input' id='published' type='text' name='published' value={published} onChange={this.handleInputChange} />
+                </div>
+
+                <div className='booksidedit__container'>
+                    <label className='booksidedit__label' htmlFor='pagecount'>Fjöldi síða:</label>
+                    <input className='booksidedit__input' id='pagecount' type='text' name='pagecount' value={pagecount} onChange={this.handleInputChange} />
+                </div>
+
+                <div className='booksidedit__container'>
+                    <label className='booksidedit__label' htmlFor='language'>Tungumál:</label>
+                    <input className='booksidedit__input' id='language' type='text' name='language' value={language} onChange={this.handleInputChange} />
                 </div>
 
                 <button className='button' disabled={loading}>Vista</button>
             </form>
+            <div className='booksidedit__nav'>
+                <Link className='button' to='/books'>Til baka</Link>
+            </div>
         </div>
         );
     } 

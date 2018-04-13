@@ -1,0 +1,39 @@
+
+.booksidedit {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 65%;
+    justify-content: space-between;
+}
+
+.booksidedit__container {
+    display: flex;
+}
+
+.booksidedit__label {
+    margin: 10px 0;
+    width: 25%;
+}
+
+.booksidedit__input {
+    margin: 10px 0;
+    padding: 5px;
+    width: 40%;
+    border-radius: 2px;
+}
+
+.booksidedit__textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.booksidedit__nav {
+    margin-top: 3rem;
+    width: 100%;
+}
+
+.booksidedit__title {
+    width: 100%;
+}
