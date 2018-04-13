@@ -54,14 +54,7 @@ class Login extends Component {
       <div className="login">
         <h2 className="login__heading">Innskráning</h2>
 
-        {/*message && (
-          <ul>{message.map((message, i) => (
-            <li key={i}>
-              {message.message}
-            </li>
-          ))}</ul>
-        )*/}
-        {typeof(message) == "string" ? (
+        {typeof(message) === "string" ? (
           <p>{message}</p>
         ) : ('') }
 

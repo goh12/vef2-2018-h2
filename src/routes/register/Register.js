@@ -56,7 +56,7 @@ class Register extends Component {
       <div className="register">
         <h2 className="register__heading">Nýskráning</h2>
 
-        {typeof(message) == "object" ? (
+        {typeof(message) === "object" ? (
           <ul>{message.map((message, i) => (
             <li key={i}>
               {message}

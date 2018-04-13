@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import api from '../../api';
 
-import './BooksId.css';
+import './BooksIdEdit.css';
 
-export default class BooksId extends Component {
+export default class BooksIdEdit extends Component {
     
     state = {
         data: null,
@@ -31,6 +31,19 @@ export default class BooksId extends Component {
             this.setState({ error: true, loading: false });            
         }
     }
+
+    handleInputChange = (e) => {
+        const { name, value } = e.target;
+    
+        if (name) {
+          this.setState({ [name]: value });
+        }
+    }
+
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        
+      }
     
     render() {
         
@@ -83,7 +96,19 @@ export default class BooksId extends Component {
             <div className='booksid__nav-2'>
                 <Link className='button' to='/books'>Til baka</Link>
             </div>
+            <form onSubmit={this.handleSubmit}>
+                <div>
+                    <label htmlFor="title">Titell:</label>
+                    <input id="title" type="text" name="title" value={data.result.title} onChange={this.handleInputChange} />
+                </div>
 
+                <div>
+                    <label htmlFor="author">Lykilorð:</label>
+                    <input id="author" type="text" name="author" value={data.result.author} onChange={this.handleInputChange} />
+                </div>
+
+                <button className='button' disabled={loading}>Vista</button>
+            </form>
         </div>
         );
     } 
