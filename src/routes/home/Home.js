@@ -12,7 +12,7 @@ class Home extends Component {
       return (
       <div className="home">
         <h2>Velkomin á bókasafnið</h2>
-        <p>Þú ert skráður notandi og getur því <Link to="/books">skráð bækur</Link> og breytt <Link to="/profile">þeim sem til eru</Link>.</p>
+        <p>Þú ert skráður notandi og getur því <Link to="/books/new">skráð bækur</Link> og breytt <Link to="/books">þeim sem til eru</Link>.</p>
         <p>Einnig getur þú skoðað <Link to="/users">aðra notendur</Link>.</p>
       </div>
       );

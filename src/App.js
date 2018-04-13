@@ -16,6 +16,7 @@ import BooksId from './routes/booksid';
 import BooksIdEdit from './routes/booksidedit';
 import Users from './routes/users';
 import Userid from './routes/user-id';
+import BookNew from './routes/booksnew';
 /* todo fleiri routes */
 
 import './App.css';
@@ -39,6 +40,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route path="/books" exact component={Books} />
             <UserRoute path="/books/:id/edit" authenticated={authenticated} component={BooksIdEdit} />
+            <Route exact path="/books/new" component={BookNew}/>
             <Route path="/books/:id" component={BooksId} />
             <UserRoute exact path="/users" authenticated={authenticated} component={Users} />
             <Route path="/users/:id" component={Userid} />
