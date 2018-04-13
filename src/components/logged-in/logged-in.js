@@ -22,7 +22,10 @@ class LoggedIn extends Component {
     <div className='logged-in'>
       <a href='/profile'><img className="logged-in__image" src={user.image || '/profile.jpg'} /></a>
         <div className='logged-in__section'>
-          <Button className="logged-in__button" children='Log out' onClick={() => this.props.dispatch(logoutUser())}/>
+          <Button className="logged-in__button" children='Log out' onClick={() => {
+              this.props.dispatch(logoutUser())
+              window.location = '.';
+            }}/>
           <p className='logged-in__name'>{user.name}</p>
         </div>
     </div>
