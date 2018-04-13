@@ -12,22 +12,25 @@ export default class Books extends Component {
         data: null,
         loading: true,
         offset: 0,
-        page: 1
+        page: 1,
       }
       
     async componentDidMount() {
-        this.fetchBooks('0');
+        this.fetchBooks(this.props.location.search);
     }
 
     async componentDidUpdate(prevProps, prevState) {
-        if (this.state.offset !== prevState.offset) {
-            this.fetchBooks(this.state.offset);
+        
+        if (this.state.offset !== prevState.offset || this.props.location.search !== prevProps.location.search) {
+            this.fetchBooks(this.props.location.search);
         }
     }
       
-    fetchBooks = async (offset) => {
+    fetchBooks = async (search) => {
         try {
-            const data = await api.get(`books?offset=${offset}`);
+            const { offset } = this.state;
+            
+            const data = await api.get(`books?offset=${offset}&search=${search.replace(/[?]+/g, '')}`);
             this.setState({ data, loading: false });
         } catch (error) {
             console.error(error);
@@ -65,7 +68,7 @@ export default class Books extends Component {
         if (error) {
             return(<p>Villa við að sækja bækur</p>);
         }
-                
+        
         return (
         <div className='books'>
             <h2>Bækur</h2>
