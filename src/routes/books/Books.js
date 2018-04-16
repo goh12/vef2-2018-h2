@@ -7,12 +7,15 @@ import Button from '../../components/button'
 import './Books.css';
 
 export default class Books extends Component {
+  NORMAL_STATE = 0;
+  SEARCH_STATE = 1;
 
     state = {
         data: null,
         loading: true,
         offset: 0,
         page: 1,
+        lastState: null,
       }
       
     async componentDidMount() {
@@ -91,7 +94,9 @@ export default class Books extends Component {
                 ? <Button className='button' children='< Fyrri síða' onClick={this.clickHandlerPrev()}/>
                 : null}
                 <p className='books__nav__page'>Síða {page}</p>
-                <Button className='button' children='Næsta síða >' onClick={this.clickHandlerNext()}/>
+                {data.result.items.length == 10 && (
+                  <Button className='button' children='Næsta síða >' onClick={this.clickHandlerNext()}/>
+                )}
             </div>
         </div>
         );
