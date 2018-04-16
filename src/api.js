@@ -28,11 +28,12 @@ async function get(endpoint) {
 /* todo aðrar aðgerðir */
 async function post(endpoint, data) {
   const url = `${baseurl}${endpoint}`;
-
+  const token = localStorage.getItem('token');
   const options = {
     body: JSON.stringify(data),
     headers: {
       'content-type': 'application/json',
+      'Authorization': `bearer ${token}`
     },
     method: 'POST',
   };

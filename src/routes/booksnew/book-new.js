@@ -6,13 +6,82 @@ import api from '../../api';
 import './book-new.css';
 
 export default class BookNew extends Component {
+    constructor(props) {
+      super(props);
+      this.state = { 
+        title: null, 
+        author: null, 
+        description: null, 
+        category: '', 
+        categorytitle: null, 
+        isbn10: null, 
+        isbn13: null,
+        published: null, 
+        pagecount: null, 
+        language: null, 
+        categories: null, 
+        loading: true };
+    }
 
+    async componentDidMount() {
+      const results = await api.get('categories');
+      const categories = results.result.items;
+      this.setState({
+        ...this.state,
+        categories,
+        loading: false,
+      });
+    }
+
+    handleInputChange = (e) => {
+      const { name, value } = e.target;
+              
+      if (name) {
+        return this.setState({ [name]: value });
+      }
+    }
+
+    async saveBook(e) {
+      try {
+        e.preventDefault();
+        const results = await api.post('books', this.state);
+        if(results.result.errors) {
+          return this.setState({
+            ...this.state,
+            postError: results.result.errors
+          });
+        }
+
+        this.setState({
+          postSuccess: true,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
     
     render() {        
         
-        return (
+      if(this.state.loading) {
+        return (<p>Sæki gögn</p>)
+      }
+
+      if(this.state.postSuccess) {
+        return (<p>Skráning hófst</p>);
+      }
+
+      const { categories } = this.state;
+      return (
+
         <div className='booksidedit'>
-            <h2 className='booksidedit__title'>Breyta bók</h2>
+            <h2 className='booksidedit__title'>Skrá bók</h2>
+            <ul>
+            {this.state.postError &&
+              this.state.postError.map((err) => {
+                return (<li key={err.field}>{err.message}</li>);
+              }
+            )}
+            </ul>
             <form onSubmit={this.handleSubmit}>
                 <div className='booksidedit__container'>
                     <label className='booksidedit__label' htmlFor='title'>Title:</label>
@@ -33,11 +102,12 @@ export default class BookNew extends Component {
                     <label className='booksidedit__label' htmlFor='category'>Flokkur:</label>
                     {typeof(categories) === "object" ? (
                     <select name='category'  onChange={this.handleInputChange} className='booksidedit__input'>
-                    {/*categories.result.items.map((category, i) => (
-                        <option key={i}>
+                    <option></option>
+                    {categories.map((category, i) => (
+                        <option key={i} value={category.id}>
                             {category.title}
                         </option>
-                    ))*/}
+                    ))}
                     </select>
                     ) : ('')}
                 </div>
@@ -67,7 +137,7 @@ export default class BookNew extends Component {
                     <input className='booksidedit__input' id='language' type='text' name='language'  onChange={this.handleInputChange} />
                 </div>
 
-                <button className='button'>Vista</button>
+                <button className='Skrá' onClick={(e) => this.saveBook(e)}>Skrá Bók</button>
             </form>
             <div className='booksidedit__nav'>
                 <Link className='button' to='/books'>Til baka</Link>
