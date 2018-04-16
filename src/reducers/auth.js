@@ -5,8 +5,7 @@ import {
   LOGIN_LOGOUT 
 } from '../actions/auth';
 
-// Ef það er notandi í localStorage erum við með innskráðan notanda
-// hér gætum við líka sótt token
+// Ef það er token í localStorage erum við með innskráðan notanda
 const token = localStorage.getItem('token') || null;
 
 const initialState = {
@@ -24,7 +23,6 @@ export default (state = initialState, action) => {
         isAuthenticated: action.isAuthenticated,
       };
     case LOGIN_SUCCESS:
-    console.log(action)
       return {
         ...state,
         isFetching: action.isFetching,
