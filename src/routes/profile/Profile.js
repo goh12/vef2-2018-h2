@@ -82,6 +82,20 @@ export default class Profile extends Component {
   }
 
   async updatePassword() {
+    if(this.state['newPassword'] !== this.state['newPassword2']) {
+      return this.setState({
+        ...this.state,
+        error: 'Password fields need to match',
+      });
+    }
+
+    if(this.state['newPassword'].length < 6) {
+      return this.setState({
+        ...this.state,
+        error: 'Password must be longer than 6 letters',
+      });
+    }
+
     const json = {
       name: this.state.user.name,
       password: this.state.newPassowrd,
@@ -100,6 +114,10 @@ export default class Profile extends Component {
       });
 
     const res = await results.json();
+    console.log(res);
+    this.setState({
+      error: 'Password has been changed',
+    })
   }
 
   async updateName() {
@@ -140,18 +158,19 @@ export default class Profile extends Component {
   }
 
   handlePasswordInputChange(e) {
-    this.setState({
-      ...this.state,
-      newPassowrd: e.target.value,
-    });
+    const { name, value } = e.target;
+              
+      if (name) {
+        return this.setState({ [name]: value });
+      }
   }
 
   render() {
     if (!this.state.user) {
       return (<p>Ekki skráður inn sem notandi</p>);
     }
-
-    const  { user } = this.state;
+    
+    const  { error, user } = this.state;
     return (
       <div className='profile'>
         <h2 className='profile__heading'>Upplýsingar</h2>
@@ -182,7 +201,10 @@ export default class Profile extends Component {
 
         <form className='profile__form' method='patch'>
           <label>Lykilorð:</label>
-          <input type='password' onChange={(e) => this.handlePasswordInputChange(e)} />
+          <input type='password' name='newPassword' onChange={(e) => this.handlePasswordInputChange(e)} />
+          <br />
+          <label>Lykilorð aftur:</label>
+          <input type='password' name='newPassword2' onChange={(e) => this.handlePasswordInputChange(e)} />
           <br />
           <Button  children='Uppfæra lykilorð' onClick={(e) => {
             e.preventDefault();
