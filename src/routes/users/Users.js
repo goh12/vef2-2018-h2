@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import api from '../../api';
 import Button from '../../components/button';
 
@@ -87,7 +86,7 @@ export default class Users extends Component {
                 ? <Button className='button' children='< Fyrri síða' onClick={this.clickHandlerPrev()}/>
                 : null}
                 <p className='users__nav__page'>Síða {page}</p>
-                {data.result.items.length == 10 && (
+                {data.result.items.length === 10 && (
                   <Button className='button' children='Næsta síða >' onClick={this.clickHandlerNext()}/>
                 )}
             </div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import api from '../../api';
 import Button from '../../components/button';
 import Review from '../../components/book-read';

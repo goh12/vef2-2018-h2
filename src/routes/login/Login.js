@@ -62,17 +62,17 @@ class Login extends Component {
 
         <form onSubmit={this.handleSubmit}>
 
-          <div>
-            <label htmlFor="username">Notendanafn:</label>
-            <input id="username" type="text" name="username" value={username} onChange={this.handleInputChange} />
+          <div className='login__container'>
+            <label htmlFor="username" className='login__label'>Notendanafn:</label>
+            <input id="username" type="text" name="username" value={username} onChange={this.handleInputChange} className='login__input' />
           </div>
 
-          <div>
-            <label htmlFor="password">Lykilorð:</label>
-            <input id="password" type="password" name="password" value={password} onChange={this.handleInputChange} />
+          <div className='login__container'>
+            <label htmlFor="password" className='login__label'>Lykilorð:</label>
+            <input id="password" type="password" name="password" value={password} onChange={this.handleInputChange} className='login__input' />
           </div>
 
-          <Button className='button' children='Innskrá' disabled={isFetching} />
+          <Button className='login__button' children='Innskrá' disabled={isFetching} />
         </form>
         <p><Link to="register">Nýskráning</Link></p>
       </div>

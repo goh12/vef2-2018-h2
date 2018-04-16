@@ -13,13 +13,13 @@
 
 .booksidedit__label {
     margin: 10px 0;
-    width: 25%;
+    flex: 1;
 }
 
 .booksidedit__input {
     margin: 10px 0;
     padding: 5px;
-    width: 40%;
+    flex: 2;
     border-radius: 2px;
 }
 

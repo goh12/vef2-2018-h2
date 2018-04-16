@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import api from '../../api';
-import Button from '../../components/button';
 
 import './user-id.css';
 import ReadBooks from '../../components/read-books';
@@ -21,7 +18,7 @@ export default class Userid extends Component {
       `users/${this.props.match.params.id}`
     );
 
-    if(data.status != 200) {
+    if(data.status !== 200) {
       return this.setState({
         error: data.error
       });
@@ -48,7 +45,7 @@ export default class Userid extends Component {
       return (
         <div className='user-id'>
         <div>
-          <img className="user-id__image" src={user.image || '/profile.jpg'} />
+          <img alt='profile' className="user-id__image" src={user.image || '/profile.jpg'} />
           <p className='user-id__name'>{user.name}</p>
         </div>
           <h2 className='user-id__heading'>Lesnar Bækur</h2>

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import api from '../../api';
-
-import './book-new.css';
+import Button from '../../components/button';
 
 export default class BookNew extends Component {
     constructor(props) {
@@ -136,8 +134,8 @@ export default class BookNew extends Component {
                     <label className='booksidedit__label' htmlFor='language'>Tungumál:</label>
                     <input className='booksidedit__input' id='language' type='text' name='language'  onChange={this.handleInputChange} />
                 </div>
-
-                <button className='Skrá' onClick={(e) => this.saveBook(e)}>Skrá Bók</button>
+                
+                <Button className='button' onClick={(e) => this.saveBook(e)} children='Skrá Bók' />
             </form>
             <div className='booksidedit__nav'>
                 <Link className='button' to='/books'>Til baka</Link>

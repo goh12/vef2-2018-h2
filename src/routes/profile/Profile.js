@@ -171,6 +171,7 @@ export default class Profile extends Component {
     }
     
     const  { error, user } = this.state;
+    
     return (
       <div className='profile'>
         <h2 className='profile__heading'>Upplýsingar</h2>

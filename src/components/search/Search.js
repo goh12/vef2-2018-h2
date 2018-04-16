@@ -31,7 +31,7 @@ export default class Search extends Component {
         <div className='search'>
           <form onSubmit={this.handleSubmit}>
             <input className="search__input" type="text" name="searchinput" value={searchinput} onChange={this.handleInputChange} placeholder='Bókaleit'/>
-            <Link to={{ pathname: '/books', search: `${searchinput}` }}><Button className='search__button' children="Leita" /></Link>
+            <Link to={{ pathname: '/books', search: `${searchinput}` }}><Button className='button--small search__button' children="Leita" /></Link>
           </form>
         </div>
     );

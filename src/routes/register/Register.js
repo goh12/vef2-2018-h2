@@ -4,8 +4,6 @@ import { createUser } from '../../actions/register';
 import { Link } from 'react-router-dom';
 import Button from '../../components/button'
 
-import './Register.css';
-
 class Register extends Component {
   state = {
     username: '',
@@ -63,22 +61,22 @@ class Register extends Component {
 
         <form onSubmit={this.handleSubmit}>
 
-          <div>
-            <label htmlFor="username">Notendanafn:</label>
-            <input id="username" type="text" name="username" value={username} onChange={this.handleInputChange} />
+          <div className='login__container'>
+            <label htmlFor="username" className='login__label'>Notendanafn:</label>
+            <input className='login__input' id="username" type="text" name="username" value={username} onChange={this.handleInputChange} />
           </div>
 
-          <div>
-            <label htmlFor="password">Lykilorð:</label>
-            <input id="password" type="password" name="password" value={password} onChange={this.handleInputChange} />
+          <div className='login__container'>
+            <label htmlFor="password" className='login__label'>Lykilorð:</label>
+            <input className='login__input' id="password" type="password" name="password" value={password} onChange={this.handleInputChange} />
           </div>
 
-          <div>
-            <label htmlFor="name">Nafn:</label>
-            <input id="name" type="text" name="name" value={name} onChange={this.handleInputChange} />
+          <div className='login__container'>
+            <label htmlFor="name" className='login__label'>Nafn:</label>
+            <input className='login__input' id="name" type="text" name="name" value={name} onChange={this.handleInputChange} />
           </div>
 
-          <Button className='button' children='Nýskrá' disabled={isFetching} />
+          <Button className='login__button' children='Nýskrá' disabled={isFetching} />
         </form>
         <p><Link to="login">Innskráning</Link></p>
       </div>

@@ -91,7 +91,7 @@ export default class ReadBooks extends Component {
               <h3>{book.title} - {book.rating}</h3>
               <p>{book.review}</p>
               </li>
-              {this.props.id == 'me' && (
+              {this.props.id === 'me' && (
                 <Button className='button' children='Eyða' onClick={async (e) => this.deleteReview(e, book.id)} />
               )}
               </React.Fragment>

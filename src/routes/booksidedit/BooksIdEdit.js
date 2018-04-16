@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import api from '../../api';
 
 import './BooksIdEdit.css';
@@ -94,7 +93,6 @@ export default class BooksIdEdit extends Component {
         const { title, 
             author, 
             description, 
-            categorytitle,
             category, 
             isbn10, 
             published, 
