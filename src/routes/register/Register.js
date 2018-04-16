@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createUser, logoutUser } from '../../actions/auth';
+import { createUser } from '../../actions/register';
 import { Link } from 'react-router-dom';
 import Button from '../../components/button'
 
-/* todo sækja actions frá ./actions */
 import './Register.css';
 
 class Register extends Component {
@@ -31,20 +30,9 @@ class Register extends Component {
     dispatch(createUser(username, password, name));
   }
 
-  handleLogout = (e) => {
-    const { dispatch } = this.props;
-    dispatch(logoutUser());
-  }
-
   render() {
     const { username, password, name } = this.state;
-    const { isFetching, isAuthenticated, message } = this.props;
-
-    if (isAuthenticated) {
-      return (
-        <button onClick={this.handleLogout}>Útskrá</button>
-      );
-    }
+    const { isFetching, message, registered } = this.props;
 
     if (isFetching) {
       return (
@@ -52,6 +40,15 @@ class Register extends Component {
       );
     }
 
+    if (registered) {
+      return (
+        <div>
+          <h2>Nýskráning tókst!</h2>
+          <p><Link to='/login'>Innskráning</Link></p>
+        </div>
+      );
+    }
+    
     return (
       <div className="register">
         <h2 className="register__heading">Nýskráning</h2>
@@ -89,12 +86,11 @@ class Register extends Component {
   }
 }
 
-/* todo tengja við redux */
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.auth.isFetching,
-    isAuthenticated: state.auth.isAuthenticated,
-    message: state.auth.message,
+    isFetching: state.register.isFetching,
+    message: state.register.message,
+    registered: state.register.registered,
   }
 }
 

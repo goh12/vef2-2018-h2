@@ -90,29 +90,3 @@ export const logoutUser = () => {
     dispatch(logout());
   }
 }
-
-export const createUser = (username, password, name) => {
-  return async (dispatch) => {
-    dispatch(requestLogin());
-
-    let register;
-    try {
-      register = await api.post('register', { username, password, name });
-    } catch (e) {
-      return dispatch(loginError([{ message: e}]));
-    }
-
-    if (register.result.errors) {      
-      const errors = [];
-      register.result.errors.forEach(element => {
-        errors.push(element.message);
-      });     
-      dispatch(loginError(errors));
-    }
-
-    if (register.result.username) {
-      // ath! væri ekki sniðugast að logga notenda inn hér?
-      dispatch(receiveLogin());
-    }
-  }
-}

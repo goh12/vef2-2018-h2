@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 class Home extends Component {
   render() {
     const { isAuthenticated } = this.props;
-    console.log(isAuthenticated);
 
-    /* todo birta mismunandi upplýsingar ef innskráður notandi eða ekki */
     if(isAuthenticated) {
       return (
       <div className="home">
