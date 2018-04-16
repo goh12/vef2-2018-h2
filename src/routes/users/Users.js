@@ -41,7 +41,7 @@ export default class Users extends Component {
 
           const { offset, page } = this.state;
 
-          this.setState({ offset: offset+10, page: page+1 })
+          this.setState({ offset: offset+10, page: page+1, loading:true })
         }
     }
 
@@ -51,7 +51,7 @@ export default class Users extends Component {
 
           const { offset, page } = this.state;
 
-          this.setState({ offset: offset-10, page: page-1 })
+          this.setState({ offset: offset-10, page: page-1, loading: true })
         }
     }
     
