@@ -7,26 +7,33 @@ import Button from '../../components/button'
 import './Books.css';
 
 export default class Books extends Component {
-  NORMAL_STATE = 0;
-  SEARCH_STATE = 1;
-
-    state = {
-        data: null,
-        loading: true,
-        offset: 0,
-        page: 1,
-        lastState: null,
-      }
+  state = {
+      data: null,
+      loading: true,
+      offset: 0,
+      page: 1,
+      lastState: null,
+  }
       
     async componentDidMount() {
         this.fetchBooks(this.props.location.search);
     }
 
     async componentDidUpdate(prevProps, prevState) {
-        
         if (this.state.offset !== prevState.offset || this.props.location.search !== prevProps.location.search) {
+          if(this.props.location.search !== prevProps.location.search) {
+            return this.setState({
+              ...this.state,
+              page: 1,
+              offset: 0
+            });
+          }
             this.fetchBooks(this.props.location.search);
         }
+    }
+
+    componentWillReceiveProps(nextProps) {
+      this.fetchBooks(nextProps.location.search);
     }
       
     fetchBooks = async (search) => {
