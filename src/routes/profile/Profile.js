@@ -121,10 +121,8 @@ export default class Profile extends Component {
   }
 
   async updateName() {
-    /* Þarf að gera password '123456' útfa galla í API í sýnilausn Óla */
     const json = {
-      name: this.state.newName,
-      password: '123456'
+      name: this.state.newName
     }
 
     const results = await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me`,
@@ -196,7 +194,6 @@ export default class Profile extends Component {
             e.preventDefault();
             this.updateName()}
           }/>
-          <p>* Vegna galla í sýnilausn Óla þarf að breyta passwordi eftir að breytt er nafni</p>
         </form>
 
 
