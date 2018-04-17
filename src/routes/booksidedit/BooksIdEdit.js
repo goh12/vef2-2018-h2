@@ -74,7 +74,7 @@ export default class BooksIdEdit extends Component {
             category,
             isbn10,
             published,
-            pagecount,
+            pageCount: pagecount,
             language,
             isbn13
         };
