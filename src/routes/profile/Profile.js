@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReadBooks from './../../components/read-books';
 import Button from './../../components/button';
+import api from '../../api';
+
 import './profile.css';
 
 export default class Profile extends Component {
@@ -21,33 +23,16 @@ export default class Profile extends Component {
 
 
   async getReadBooks() {
-    return fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me/read?offset=${this.state.offset}`,
-    {
-      method: 'get',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Origin': '',
-        'Host': 'vef2-2018-h1-synilausn-fgg.herokuapp.com',
-        'Authorization': `bearer ${this.state.token}`,
-      }
-    })
+    const data = await api.get(`users/me/read?offset=${this.state.offset}`);
+    return data;
   }
 
   async updateLocalUser() {
-    const results = await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me`,
-      {
-        method: 'get',
-        headers: {
-          'Host': 'vef2-2018-h1-synilausn-fgg.herokuapp.com',
-          'Authorization': `bearer ${this.state.token}`,
-        }
-      });
-
-      const res = await results.json();
-      console.log(res);
-      localStorage.setItem('user', JSON.stringify(res));
-      window.location = '/profile';
+    const res = await api.get('users/me');
+    console.log(res);
+    
+    localStorage.setItem('user', JSON.stringify(res.result));
+    window.location = '/profile';
   }
 
   async updateImage() {
@@ -97,24 +82,11 @@ export default class Profile extends Component {
     }
 
     const json = {
-      name: this.state.user.name,
-      password: this.state.newPassowrd,
+      password: this.state.newPassword,
     }
 
-    const results = await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me`,
-      {
-        method: 'PATCH',
-        body: JSON.stringify(json),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Host': 'vef2-2018-h1-synilausn-fgg.herokuapp.com',
-          'Authorization': `bearer ${this.state.token}`,
-        }
-      });
+    const results = await api.patch(`users/me`, json);
 
-    const res = await results.json();
-    console.log(res);
     this.setState({
       error: 'Password has been changed',
     })
@@ -125,19 +97,7 @@ export default class Profile extends Component {
       name: this.state.newName
     }
 
-    const results = await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me`,
-      {
-        method: 'PATCH',
-        body: JSON.stringify(json),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Host': 'vef2-2018-h1-synilausn-fgg.herokuapp.com',
-          'Authorization': `bearer ${this.state.token}`,
-        }
-      });
-
-    const res = await results.json();
+    const results = await api.patch(`users/me`,json);
     this.updateLocalUser();
   }
 
@@ -157,10 +117,10 @@ export default class Profile extends Component {
 
   handlePasswordInputChange(e) {
     const { name, value } = e.target;
-              
-      if (name) {
-        return this.setState({ [name]: value });
-      }
+                  
+    if (name) {
+      return this.setState({ [name]: value });
+    }
   }
 
   render() {

@@ -9,7 +9,10 @@ async function get(endpoint) {
 
   const options = {
     method: 'GET',
-    headers: {},
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
   };
 
   if (token) {
@@ -60,7 +63,7 @@ async function patch(endpoint, data) {
       'Host': 'vef2-2018-h1-synilausn-fgg.herokuapp.com',
     }
   };
-
+  
   if (token) {
     options.headers['Authorization'] = `Bearer ${token.replace(/['"]+/g, '')}`;
   }
