@@ -22,28 +22,14 @@ export default class Review extends Component {
   }
     
   async postRead(body) {
-    const results = await fetch(
-      'https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me/read',
-      {
-        method: 'POST',
-        body: JSON.stringify(this.state.review),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Host': 'vef2-2018-h1-synilausn-fgg.herokuapp.com',
-          'Authorization': `bearer ${this.state.token}`,
-        }
-      }
-
-    )
-
+    const results = await api.post('users/me/read', this.state.review);
     this.props.toggleReview();
   }
 
   handleSelectionChange(e) {
     const review = {
       ...this.state.review,
-      rating: parseInt(e.target.value),
+      rating: parseInt(e.target.value, 10),
     }
 
     this.setState({
