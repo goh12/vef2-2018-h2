@@ -85,7 +85,7 @@ export default class Profile extends Component {
       password: this.state.newPassword,
     }
 
-    const results = await api.patch(`users/me`, json);
+    await api.patch(`users/me`, json);
 
     this.setState({
       error: 'Password has been changed',
@@ -97,7 +97,7 @@ export default class Profile extends Component {
       name: this.state.newName
     }
 
-    const results = await api.patch(`users/me`,json);
+    await api.patch(`users/me`,json);
     this.updateLocalUser();
   }
 
@@ -128,12 +128,12 @@ export default class Profile extends Component {
       return (<p>Ekki skráður inn sem notandi</p>);
     }
     
-    const  { error, user } = this.state;
+    const  { error } = this.state;
     
     return (
       <div className='profile'>
         <h2 className='profile__heading'>Upplýsingar</h2>
-        {this.state.error ? (
+        {error ? (
           <p> {this.state.error} </p>
         ) : (
           ''

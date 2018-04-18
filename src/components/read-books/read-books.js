@@ -48,7 +48,7 @@ export default class ReadBooks extends Component {
   
   async deleteReview(e, id) {
     try {
-      const results = await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me/read/${id}`,
+      await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me/read/${id}`,
         {
           method: 'DELETE',
           headers: {

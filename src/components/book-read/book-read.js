@@ -22,7 +22,7 @@ export default class Review extends Component {
   }
     
   async postRead(body) {
-    const results = await api.post('users/me/read', this.state.review);
+    await api.post('users/me/read', this.state.review);
     this.props.toggleReview();
   }
 
