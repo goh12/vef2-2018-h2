@@ -4,3 +4,8 @@
   background-color: #dcbe87;
   align-items: center;
 }
+
+.header__heading a {
+  margin: 10px;
+  text-decoration: none;
+}

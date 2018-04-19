@@ -11,6 +11,20 @@
     display: flex;
 }
 
+.booksidedit__input--error {
+    flex: 2;
+    margin: 10px 0;
+    padding: 5px;
+    border: 2px solid #FF0000;
+    border-radius: 2px;
+}
+
+.booksidedit__label--error {
+    margin: 10px 0;
+    flex: 1;
+    color: #FF0000;
+}
+
 .booksidedit__label {
     margin: 10px 0;
     flex: 1;

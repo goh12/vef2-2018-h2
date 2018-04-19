@@ -20,7 +20,6 @@ async function get(endpoint) {
     options.headers['Authorization'] = `Bearer ${token.replace(/['"]+/g, '')}`;
   }
   
-  /* todo framkvæma get */
   const response = await fetch(url, options);
 
   const result = await response.json();
@@ -28,7 +27,6 @@ async function get(endpoint) {
   return {result, status: response.status };
 }
 
-/* todo aðrar aðgerðir */
 async function post(endpoint, data) {
   const url = `${baseurl}${endpoint}`;
   const token = localStorage.getItem('token');

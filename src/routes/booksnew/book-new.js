@@ -8,15 +8,15 @@ export default class BookNew extends Component {
       super(props);
       this.state = { 
         title: null, 
-        author: null, 
-        description: null, 
+        author: "", 
+        description: "", 
         category: '', 
         categorytitle: null, 
         isbn10: null, 
         isbn13: null,
-        published: null, 
+        published: "", 
         pagecount: null, 
-        language: null, 
+        language: "", 
         categories: null, 
         loading: true };
     }
@@ -68,7 +68,14 @@ export default class BookNew extends Component {
         return (<p>Skráning hófst</p>);
       }
 
-      const { categories } = this.state;
+      const { categories, postError } = this.state;
+
+      // field validation errors
+      const titleFieldError = postError ? postError.some(item => item.field === 'title') : false;
+      const isbn10FieldError = postError ? postError.some(item => item.field === 'isbn10') : false; 
+      const isbn13FieldError = postError ? postError.some(item => item.field === 'isbn13') : false;       
+      const categoryFieldError = postError ? postError.some(item => item.field === 'category') : false;
+
       return (
 
         <div className='booksidedit'>
@@ -82,8 +89,9 @@ export default class BookNew extends Component {
             </ul>
             <form onSubmit={this.handleSubmit}>
                 <div className='booksidedit__container'>
-                    <label className='booksidedit__label' htmlFor='title'>Title:</label>
-                    <input className='booksidedit__input' id='title' type='text' name='title' onChange={this.handleInputChange} />
+                    <label className={titleFieldError ? 'booksidedit__label--error':'booksidedit__label'} htmlFor='title'>Title:</label>
+                    <input className={titleFieldError ? 'booksidedit__input--error':'booksidedit__input'} 
+                      id='title' type='text' name='title' onChange={this.handleInputChange} />
                 </div>
 
                 <div className='booksidedit__container'>
@@ -97,9 +105,10 @@ export default class BookNew extends Component {
                 </div>
 
                 <div className='booksidedit__container'>
-                    <label className='booksidedit__label' htmlFor='category'>Flokkur:</label>
+                    <label className={categoryFieldError ? 'booksidedit__label--error':'booksidedit__label'} htmlFor='category'>Flokkur:</label>
                     {typeof(categories) === "object" ? (
-                    <select name='category'  onChange={this.handleInputChange} className='booksidedit__input'>
+                    <select name='category'  onChange={this.handleInputChange} 
+                      className={categoryFieldError ? 'booksidedit__input--error':'booksidedit__input'}>
                     <option></option>
                     {categories.map((category, i) => (
                         <option key={i} value={category.id}>
@@ -111,13 +120,15 @@ export default class BookNew extends Component {
                 </div>
 
                 <div className='booksidedit__container'>
-                    <label className='booksidedit__label' htmlFor='isbn10'>ISBN10:</label>
-                    <input className='booksidedit__input' id='isbn10' type='text' name='isbn10'  onChange={this.handleInputChange} />
+                    <label className={isbn10FieldError ? 'booksidedit__label--error':'booksidedit__label'} htmlFor='isbn10'>ISBN10:</label>
+                    <input className={isbn10FieldError ? 'booksidedit__input--error':'booksidedit__input'} 
+                       id='isbn10' type='text' name='isbn10'  onChange={this.handleInputChange} />
                 </div>
 
                 <div className='booksidedit__container'>
-                    <label className='booksidedit__label' htmlFor='isbn13'>ISBN13:</label>
-                    <input className='booksidedit__input' id='isbn13' type='text' name='isbn13'  onChange={this.handleInputChange} />
+                    <label className={isbn13FieldError ? 'booksidedit__label--error':'booksidedit__label'} htmlFor='isbn13'>ISBN13:</label>
+                    <input className={isbn13FieldError ? 'booksidedit__input--error':'booksidedit__input'} 
+                      id='isbn13' type='text' name='isbn13'  onChange={this.handleInputChange} />
                 </div>
 
                 <div className='booksidedit__container'>

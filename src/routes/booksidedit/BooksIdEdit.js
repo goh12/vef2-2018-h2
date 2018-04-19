@@ -106,6 +106,11 @@ export default class BooksIdEdit extends Component {
             patchErrors } = this.state;
         const { id } = this.props.match.params;    
         
+        // field validation errors
+        const titleFieldError = patchErrors ? patchErrors.some(item => item.field === 'title') : false;
+        const isbn10FieldError = patchErrors ? patchErrors.some(item => item.field === 'isbn10') : false; 
+        const isbn13FieldError = patchErrors ? patchErrors.some(item => item.field === 'isbn13') : false;       
+        
         if (loading) {
             return(<p>Sæki bók ...</p>);
         }
@@ -135,8 +140,9 @@ export default class BooksIdEdit extends Component {
             ) : ('')}
             <form onSubmit={this.handleSubmit}>
                 <div className='booksidedit__container'>
-                    <label className='booksidedit__label' htmlFor='title'>Title:</label>
-                    <input className='booksidedit__input' id='title' type='text' name='title' value={title} onChange={this.handleInputChange} />
+                    <label className={titleFieldError ? 'booksidedit__label--error':'booksidedit__label'} htmlFor='title'>Title:</label>
+                    <input className={titleFieldError ? 'booksidedit__input--error':'booksidedit__input'} 
+                        id='title' type='text' name='title' value={title} onChange={this.handleInputChange} />
                 </div>
 
                 <div className='booksidedit__container'>
@@ -163,13 +169,15 @@ export default class BooksIdEdit extends Component {
                 </div>
 
                 <div className='booksidedit__container'>
-                    <label className='booksidedit__label' htmlFor='isbn10'>ISBN10:</label>
-                    <input className='booksidedit__input' id='isbn10' type='text' name='isbn10' value={isbn10} onChange={this.handleInputChange} />
+                    <label className={isbn10FieldError ? 'booksidedit__label--error':'booksidedit__label'} htmlFor='isbn10'>ISBN10:</label>
+                    <input className={isbn10FieldError ? 'booksidedit__input--error':'booksidedit__input'}  
+                        id='isbn10' type='text' name='isbn10' value={isbn10} onChange={this.handleInputChange} />
                 </div>
 
                 <div className='booksidedit__container'>
-                    <label className='booksidedit__label' htmlFor='isbn13'>ISBN13:</label>
-                    <input className='booksidedit__input' id='isbn13' type='text' name='isbn13' value={isbn13} onChange={this.handleInputChange} />
+                    <label className={isbn13FieldError ? 'booksidedit__label--error':'booksidedit__label'} htmlFor='isbn13'>ISBN13:</label>
+                    <input className={isbn13FieldError ? 'booksidedit__input--error':'booksidedit__input'} 
+                        id='isbn13' type='text' name='isbn13' value={isbn13} onChange={this.handleInputChange} />
                 </div>
 
                 <div className='booksidedit__container'>

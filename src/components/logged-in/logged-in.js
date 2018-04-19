@@ -16,7 +16,7 @@ class LoggedIn extends Component {
 
   render() {
     const user = this.props.user;
-    console.log(this.props);
+
     return(
     <div className='logged-in'>
       <a href='/profile'><img alt='profile' className="logged-in__image" src={user.image || '/profile.jpg'} /></a>
