@@ -45,19 +45,17 @@ export default class Profile extends Component {
       const formData = new FormData();
       formData.append('profile', data);
 
-      const results = await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me/profile`,
+      const results = await api.call(`users/me/profile`,
       {
         method: 'post',
         body: formData,
         headers: {
           'Host': 'vef2-2018-h1-synilausn-fgg.herokuapp.com',
-          'Authorization': `bearer ${this.state.token}`,
         }
       });
-      const res = await results.json();
 
-      if (res.error) {
-        return this.setState({...this.state, error: res.error});
+      if (results.error) {
+        return this.setState({...this.state, error: results.error});
       }
 
       this.updateLocalUser();

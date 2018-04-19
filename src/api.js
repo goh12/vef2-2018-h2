@@ -73,8 +73,25 @@ async function patch(endpoint, data) {
   return { result, status: response.status };
 }
 
+async function call(endpoint, options) {
+  const url = `${baseurl}${endpoint}`;
+
+  const token = window.localStorage.getItem('token');
+    
+  if (token) {
+    options.headers['Authorization'] = `Bearer ${token.replace(/['"]+/g, '')}`;
+  }
+
+  const response = await fetch(url, options);
+
+  const result = await response.json();
+
+  return { result, status: response.status };
+}
+
 export default {
   get,
   post,
-  patch
+  patch,
+  call
 };
