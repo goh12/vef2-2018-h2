@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../api';
 import Button from '../../components/button'
+import Helmet from 'react-helmet';
 
 import './Books.css';
 
@@ -80,6 +81,7 @@ export default class Books extends Component {
         
         return (
         <div className='books'>
+            <Helmet title={`Bækur – síða ${page}`} />
             <h2>Bækur</h2>
             {data.result.items && (
                 <ul className='books__container'>{data.result.items.map((book, i) => (

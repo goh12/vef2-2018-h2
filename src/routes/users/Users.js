@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../api';
 import Button from '../../components/button';
+import Helmet from 'react-helmet';
 
 import './Users.css';
 
@@ -67,6 +68,7 @@ export default class Users extends Component {
         
         return (
         <div className='users'>
+            <Helmet title={`Notendur – síða ${page}`} />
             <h2>Notendur</h2>
             {data.result.items && (
                 <ul className='users__container'>{data.result.items.map((user,i) => (

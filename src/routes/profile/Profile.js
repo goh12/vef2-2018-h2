@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReadBooks from './../../components/read-books';
 import Button from './../../components/button';
 import api from '../../api';
+import Helmet from 'react-helmet';
 
 import './profile.css';
 
@@ -128,10 +129,11 @@ export default class Profile extends Component {
       return (<p>Ekki skráður inn sem notandi</p>);
     }
     
-    const  { error } = this.state;
+    const  { user, error } = this.state;
     
     return (
       <div className='profile'>
+        <Helmet title={`${user.name}`} />
         <h2 className='profile__heading'>Upplýsingar</h2>
         {error ? (
           <p> {this.state.error} </p>

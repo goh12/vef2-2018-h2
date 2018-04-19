@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../api';
+import Helmet from 'react-helmet';
 
 import './BooksIdEdit.css';
 
@@ -130,6 +131,7 @@ export default class BooksIdEdit extends Component {
         
         return (
         <div className='booksidedit'>
+            <Helmet title={`Breyta bók`} />
             <h2 className='booksidedit__title'>Breyta bók</h2>
             {patchErrors ? (
                 <ul>{patchErrors.map((patcherror, i) => (
