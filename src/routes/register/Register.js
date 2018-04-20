@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createUser } from '../../actions/register';
 import { Link } from 'react-router-dom';
-import Button from '../../components/button'
+import Button from '../../components/button';
+import Helmet from 'react-helmet';
 
 class Register extends Component {
   state = {
@@ -49,6 +50,7 @@ class Register extends Component {
     
     return (
       <div className="register">
+        <Helmet title={`Nýskráning`} />
         <h2 className="register__heading">Nýskráning</h2>
 
         {typeof(message) === "object" ? (

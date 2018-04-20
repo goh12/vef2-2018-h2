@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { loginUser, logoutUser } from '../../actions/auth';
 import { Link } from 'react-router-dom';
 import Button from '../../components/button'
+import Helmet from 'react-helmet';
 
 
 /* todo sækja actions frá ./actions */
@@ -53,6 +54,7 @@ class Login extends Component {
     
     return (
       <div className="login">
+        <Helmet title={`Innskráning`} />
         <h2 className="login__heading">Innskráning</h2>
 
         {typeof(message) === "string" ? (

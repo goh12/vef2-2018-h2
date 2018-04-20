@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../api';
 import Button from '../../components/button';
+import Helmet from 'react-helmet';
 
 export default class BookNew extends Component {
     constructor(props) {
@@ -77,8 +78,8 @@ export default class BookNew extends Component {
       const categoryFieldError = postError ? postError.some(item => item.field === 'category') : false;
 
       return (
-
         <div className='booksidedit'>
+          <Helmet title={`Skrá nýja bók`} />
             <h2 className='booksidedit__title'>Skrá bók</h2>
             <ul>
             {this.state.postError &&

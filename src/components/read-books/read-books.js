@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../button';
+import api from '../../api';
 
 import './read-books.css';
 
@@ -16,18 +17,8 @@ export default class ReadBooks extends Component {
   }
 
   async getReadBooks() {
-    const results = await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/${this.props.id}/read?offset=${this.state.offset}`,
-    {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Origin': '',
-        'Host': 'vef2-2018-h1-synilausn-fgg.herokuapp.com',
-        'Authorization': `bearer ${this.props.token || localStorage.getItem('token')}`,
-      }
-    });
-    const read = await results.json();
+    const data = await api.get(`users/${this.props.id}/read?offset=${this.state.offset}`);
+    const read = data.result;
     
     if(read.error) {
       return this.setState({
@@ -48,18 +39,8 @@ export default class ReadBooks extends Component {
   
   async deleteReview(e, id) {
     try {
-      await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me/read/${id}`,
-        {
-          method: 'DELETE',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Origin': '',
-            'Host': 'vef2-2018-h1-synilausn-fgg.herokuapp.com',
-            'Authorization': `bearer ${this.props.token}`,
-          }
-        });
-        this.getReadBooks();
+      await api.del(`users/me/read/${id}`);
+      this.getReadBooks();
     } catch (err) {
       console.log(err);
     } 

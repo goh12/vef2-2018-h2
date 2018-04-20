@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../api';
-
+import Helmet from 'react-helmet';
 import './user-id.css';
 import ReadBooks from '../../components/read-books';
 
@@ -41,15 +41,16 @@ export default class Userid extends Component {
       }
 
       const { user } = this.state;
-      console.log(user);
+
       return (
         <div className='user-id'>
-        <div>
-          <img alt='profile' className="user-id__image" src={user.image || '/profile.jpg'} />
-          <p className='user-id__name'>{user.name}</p>
-        </div>
-          <h2 className='user-id__heading'>Lesnar Bækur</h2>
-          <ReadBooks id={user.id} />
+          <Helmet title={`${user.name}`} />
+          <div>
+            <img alt='profile' className="user-id__image" src={user.image || '/profile.jpg'} />
+            <p className='user-id__name'>{user.name}</p>
+          </div>
+            <h2 className='user-id__heading'>Lesnar Bækur</h2>
+            <ReadBooks id={user.id} />
         </div>
       );
     } 

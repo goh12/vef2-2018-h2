@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReadBooks from './../../components/read-books';
 import Button from './../../components/button';
 import api from '../../api';
+import Helmet from 'react-helmet';
 
 import './profile.css';
 
@@ -44,19 +45,17 @@ export default class Profile extends Component {
       const formData = new FormData();
       formData.append('profile', data);
 
-      const results = await fetch(`https://vef2-2018-h1-synilausn-fgg.herokuapp.com/users/me/profile`,
+      const results = await api.call(`users/me/profile`,
       {
         method: 'post',
         body: formData,
         headers: {
           'Host': 'vef2-2018-h1-synilausn-fgg.herokuapp.com',
-          'Authorization': `bearer ${this.state.token}`,
         }
       });
-      const res = await results.json();
 
-      if (res.error) {
-        return this.setState({...this.state, error: res.error});
+      if (results.error) {
+        return this.setState({...this.state, error: results.error});
       }
 
       this.updateLocalUser();
@@ -128,10 +127,11 @@ export default class Profile extends Component {
       return (<p>Ekki skráður inn sem notandi</p>);
     }
     
-    const  { error } = this.state;
+    const  { user, error } = this.state;
     
     return (
       <div className='profile'>
+        <Helmet title={`${user.name}`} />
         <h2 className='profile__heading'>Upplýsingar</h2>
         {error ? (
           <p> {this.state.error} </p>

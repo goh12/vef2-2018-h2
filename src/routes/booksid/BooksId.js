@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import api from '../../api';
 import Button from '../../components/button';
 import Review from '../../components/book-read';
+import Helmet from 'react-helmet';
 
 import './BooksId.css';
 
@@ -86,6 +87,7 @@ export default class BookRead extends Component {
         
         return (
         <div className='booksid'>
+            <Helmet title={`${data.result.title}`} />
             {data.result && (
                 <ul className='booksid__container' key={data.result.id}>
                     <li className='booksid__item__title'>
