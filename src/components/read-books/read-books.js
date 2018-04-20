@@ -5,7 +5,7 @@ import api from '../../api';
 import './read-books.css';
 
 export default class ReadBooks extends Component {
-  
+
   constructor(props) {
     super(props );
 
@@ -19,7 +19,7 @@ export default class ReadBooks extends Component {
   async getReadBooks() {
     const data = await api.get(`users/${this.props.id}/read?offset=${this.state.offset}`);
     const read = data.result;
-    
+
     if(read.error) {
       return this.setState({
         ...this.state,
@@ -36,14 +36,14 @@ export default class ReadBooks extends Component {
       items: read.items,
     });
   }
-  
+
   async deleteReview(e, id) {
     try {
       await api.del(`users/me/read/${id}`);
       this.getReadBooks();
     } catch (err) {
       console.log(err);
-    } 
+    }
   }
 
   componentDidMount() {
@@ -68,13 +68,14 @@ export default class ReadBooks extends Component {
           {items.map((book) => {
             return (
               <React.Fragment key={book.id}>
-              <li>
-              <h3>{book.title} - {book.rating}</h3>
+              <li className='readbook'>
+              <h3 className='readbook__title'>{book.title}</h3>
+              <p>Einkunn: {book.rating}</p>
               <p>{book.review}</p>
-              </li>
               {this.props.id === 'me' && (
-                <Button className='button' children='Eyða' onClick={async (e) => this.deleteReview(e, book.id)} />
+                <Button className='button--del' children='Eyða' onClick={async (e) => this.deleteReview(e, book.id)} />
               )}
+              </li>
               </React.Fragment>
             )
           })}

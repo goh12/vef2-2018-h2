@@ -7,12 +7,12 @@ import Helmet from 'react-helmet';
 import './profile.css';
 
 export default class Profile extends Component {
-  
+
   constructor() {
     super();
     let user = localStorage.getItem('user');
     user = user ? JSON.parse(user) : user;
-    
+
     const token = localStorage.getItem('token');
 
     this.state = {
@@ -31,7 +31,7 @@ export default class Profile extends Component {
   async updateLocalUser() {
     const res = await api.get('users/me');
     console.log(res);
-    
+
     localStorage.setItem('user', JSON.stringify(res.result));
     window.location = '/profile';
   }
@@ -62,7 +62,7 @@ export default class Profile extends Component {
     } catch(e) {
       console.log(e);
     }
-    
+
   }
 
   async updatePassword() {
@@ -116,7 +116,7 @@ export default class Profile extends Component {
 
   handlePasswordInputChange(e) {
     const { name, value } = e.target;
-                  
+
     if (name) {
       return this.setState({ [name]: value });
     }
@@ -126,9 +126,9 @@ export default class Profile extends Component {
     if (!this.state.user) {
       return (<p>Ekki skráður inn sem notandi</p>);
     }
-    
+
     const  { user, error } = this.state;
-    
+
     return (
       <div className='profile'>
         <Helmet title={`${user.name}`} />
@@ -147,9 +147,9 @@ export default class Profile extends Component {
         </form>
 
         <form className='profile__form' method='patch'>
-          <label>Nafn:</label>
+          <label className='profile__form__input'>Nafn:
           <input type='text' onChange={(e) => this.handleNameInputChange(e)} />
-          <br />
+          </label>
           <Button  children='Uppfæra nafn' onClick={(e) => {
             e.preventDefault();
             this.updateName()}
@@ -158,12 +158,11 @@ export default class Profile extends Component {
 
 
         <form className='profile__form' method='patch'>
-          <label>Lykilorð:</label>
-          <input type='password' name='newPassword' onChange={(e) => this.handlePasswordInputChange(e)} />
-          <br />
-          <label>Lykilorð aftur:</label>
+          <label className='profile__form__input'>Lykilorð:
+          <input type='password' name='newPassword' onChange={(e) => this.handlePasswordInputChange(e)} /></label>
+          <label className='profile__form__input'>Lykilorð aftur:
           <input type='password' name='newPassword2' onChange={(e) => this.handlePasswordInputChange(e)} />
-          <br />
+          </label>
           <Button  children='Uppfæra lykilorð' onClick={(e) => {
             e.preventDefault();
             this.updatePassword()}
