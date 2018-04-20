@@ -41,7 +41,13 @@ class Login extends Component {
   render() {
     const { username, password } = this.state;
     const { isFetching, isAuthenticated, message } = this.props;
-
+    
+    let tokenExpired = false;
+    if (this.props.location.search === '?tokenExpired') {
+      tokenExpired = true;
+      this.handleLogout();
+    } 
+    
     if (isAuthenticated) {
       return window.location = '/';
     }
@@ -56,6 +62,7 @@ class Login extends Component {
       <div className="login">
         <Helmet title={`Innskráning`} />
         <h2 className="login__heading">Innskráning</h2>
+        {tokenExpired ? <p>Vinsamlegast skráðu þig aftur inn</p> : ''}
 
         {typeof(message) === "string" ? (
           <p>{message}</p>
@@ -82,7 +89,6 @@ class Login extends Component {
   }
 }
 
-/* todo tengja við redux */
 const mapStateToProps = (state) => {
   return {
     isFetching: state.auth.isFetching,

@@ -34,7 +34,6 @@ function receiveLogin(user) {
 }
 
 function loginError(message) {
-  console.log(message);
   
   return {
     type: LOGIN_FAILURE,
@@ -53,7 +52,6 @@ function logout() {
   }
 }
 
-/* todo async "thunk" fyrir tengingu við vefþjónustu */
 // Thunk!
 export const loginUser = (username, password) => {  
   return async (dispatch) => {
@@ -66,10 +64,7 @@ export const loginUser = (username, password) => {
       return dispatch(loginError(e))
     }
 
-    if (!login.result.token) {
-      // útfæra þ.a. allir errorar eru settir í fylki
-      // breytum þá aftur í map fallið inn í login
-      // eins og staðan er núna kemur aðeins inn einn error, ekki allir        
+    if (!login.result.token) {   
       dispatch(loginError(login.result.error))
     }
 

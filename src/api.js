@@ -24,6 +24,10 @@ async function get(endpoint) {
 
   const result = await response.json();
 
+  if (response.status === 401) {
+    return window.location = '/login?tokenExpired';
+  }
+  
   return {result, status: response.status };
 }
 
@@ -42,7 +46,11 @@ async function post(endpoint, data) {
   const response = await fetch(url, options);
 
   const result = await response.json();
-  
+
+  if (response.status === 401) {
+    return window.location = '/login?tokenExpired';
+  }
+
   return { result, status: response.status };
 }
 
@@ -70,6 +78,10 @@ async function patch(endpoint, data) {
 
   const result = await response.json();
 
+  if (response.status === 401) {
+    return window.location = '/login?tokenExpired';
+  }
+
   return { result, status: response.status };
 }
 
@@ -85,6 +97,10 @@ async function call(endpoint, options) {
   const response = await fetch(url, options);
 
   const result = await response.json();
+
+  if (response.status === 401) {
+    return window.location = '/login?tokenExpired';
+  }
 
   return { result, status: response.status };
 }
@@ -103,7 +119,11 @@ async function del(endpoint) {
     },
   };
 
-  await fetch(url, options);
+  const response = await fetch(url, options);
+
+  if (response.status === 401) {
+    return window.location = '/login?tokenExpired';
+  }
 }
 
 export default {

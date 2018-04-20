@@ -39,10 +39,10 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route path="/books" exact component={Books} />
             <UserRoute path="/books/:id/edit" authenticated={authenticated} component={BooksIdEdit} />
-            <Route exact path="/books/new" component={BookNew}/>
+            <UserRoute exact path="/books/new" authenticated={authenticated} component={BookNew}/>
             <Route path="/books/:id" component={BooksId} />
             <UserRoute exact path="/users" authenticated={authenticated} component={Users} />
-            <Route path="/users/:id" component={Userid} />
+            <UserRoute path="/users/:id" authenticated={authenticated}  component={Userid} />
             <Route component={NotFound} />
           </Switch>
         </div>
