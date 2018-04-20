@@ -9,6 +9,10 @@
     margin: 10px 0;
 }
 
+.books__item a {
+  text-decoration: none;
+}
+
 .books__item__title {
     font-weight: bold;
     text-decoration: underline;

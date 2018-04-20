@@ -14,7 +14,7 @@ export default class Books extends Component {
       page: 1,
       lastState: null,
   }
-      
+
     async componentDidMount() {
         this.fetchBooks(this.props.location.search);
     }
@@ -35,16 +35,16 @@ export default class Books extends Component {
     componentWillReceiveProps(nextProps) {
       this.fetchBooks(nextProps.location.search);
     }
-      
+
     fetchBooks = async (search) => {
         try {
             const { offset } = this.state;
-            
+
             const data = await api.get(`books?offset=${offset}&search=${search.replace(/[?]+/g, '')}`);
             this.setState({ data, loading: false });
         } catch (error) {
             console.error(error);
-            this.setState({ error: true, loading: false });            
+            this.setState({ error: true, loading: false });
         }
     }
 
@@ -67,7 +67,7 @@ export default class Books extends Component {
           this.setState({ offset: offset-10, page: page-1, loading: true });
         }
     }
-    
+
     render() {
         const { data, loading, error, offset, page } = this.state;
 
@@ -78,7 +78,7 @@ export default class Books extends Component {
         if (error) {
             return(<p>Villa við að sækja bækur</p>);
         }
-        
+
         return (
         <div className='books'>
             <Helmet title={`Bækur – síða ${page}`} />
@@ -90,7 +90,7 @@ export default class Books extends Component {
                             <div className='books__item__title'>
                             {book.title}
                             </div>
-                            <div className='books_item_author'>
+                            <div className='books__item__author'>
                             {book.author}
                             </div>
                         </Link>
@@ -108,6 +108,5 @@ export default class Books extends Component {
             </div>
         </div>
         );
-    } 
+    }
 };
-

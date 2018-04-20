@@ -48,6 +48,10 @@
     width: 100%;
 }
 
+.booksidedit__nav a {
+  text-decoration: none;
+}
+
 .booksidedit__title {
     width: 100%;
 }

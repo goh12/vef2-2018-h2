@@ -20,7 +20,7 @@ export default class Review extends Component {
       review
     }
   }
-    
+
   async postRead(body) {
     await api.post('users/me/read', this.state.review);
     this.props.toggleReview();
@@ -38,7 +38,7 @@ export default class Review extends Component {
     })
 
   }
-  
+
   handleTextAreaChange(e) {
     const review = {
       ...this.state.review,
@@ -56,23 +56,26 @@ export default class Review extends Component {
     return (
     <div className='review'>
       <form>
-        <label>Um bók:</label><br/> 
-        <textarea rows='10' cols='60' type="textarea" className="review__about" onChange={e => this.handleTextAreaChange(e)}/>
+        <label>Um bók:</label><br/>
+        <textarea type="textarea" className="review__about" onChange={e => this.handleTextAreaChange(e)}/>
         <br />
-        <label>Einkunn:</label><br/>
-        <select className='review__rating' onChange={e => this.handleSelectionChange(e)}>
-          <option value={1}>1</option>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-          <option value={4}>4</option>
-          <option value={5}>5</option>
-        </select>
+        <div className='review__rating'>
+          <label className="review__rating__label" for="bookrating">Einkunn:</label><br/>
+          <select id="bookrating" className='review__rating__numbers' onChange={e => this.handleSelectionChange(e)}>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+          </select>
+        </div>
       </form>
-      <Button className='review__save' children='Vista' onClick={this.postRead.bind(this)}/>
-      <Button className='review__quit' children='Hætta við' onClick={(e) => this.props.toggleReview(e)}/>
+      <div className='review__saveorquit'>
+        <Button className='review__save' children='Vista' onClick={this.postRead.bind(this)}/>
+        <Button className='review__quit button--del' children='Hætta við' onClick={(e) => this.props.toggleReview(e)}/>
+      </div>
     </div>
     )
 
-  } 
+  }
 };
-
