@@ -42,11 +42,6 @@ class Login extends Component {
     const { username, password } = this.state;
     const { isFetching, isAuthenticated, message } = this.props;
     
-    if (this.props.location.search === '?tokenExpired') {
-      this.handleLogout();
-      return window.location = '/login';
-    } 
-    
     if (isAuthenticated) {
       return window.location = '/';
     }
@@ -61,7 +56,7 @@ class Login extends Component {
       <div className="login">
         <Helmet title={`Innskráning`} />
         <h2 className="login__heading">Innskráning</h2>
-
+        {this.props.location.search === '?tokenExpired' ? <p>Vinsamlegast skráðu þig aftur inn</p> : ''}
         {typeof(message) === "string" ? (
           <p>{message}</p>
         ) : ('') }

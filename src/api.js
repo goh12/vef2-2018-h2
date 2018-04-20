@@ -25,6 +25,8 @@ async function get(endpoint) {
   const result = await response.json();
 
   if (response.status === 401) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     return window.location = '/login?tokenExpired';
   }
   
@@ -48,6 +50,8 @@ async function post(endpoint, data) {
   const result = await response.json();
 
   if (response.status === 401) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     return window.location = '/login?tokenExpired';
   }
 
@@ -79,6 +83,8 @@ async function patch(endpoint, data) {
   const result = await response.json();
 
   if (response.status === 401) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     return window.location = '/login?tokenExpired';
   }
 
@@ -99,6 +105,8 @@ async function call(endpoint, options) {
   const result = await response.json();
 
   if (response.status === 401) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     return window.location = '/login?tokenExpired';
   }
 
@@ -122,6 +130,8 @@ async function del(endpoint) {
   const response = await fetch(url, options);
 
   if (response.status === 401) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     return window.location = '/login?tokenExpired';
   }
 }
