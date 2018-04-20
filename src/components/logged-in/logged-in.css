@@ -2,14 +2,13 @@
   display: flex;
   justify-content: space-between;
   height: 4em;
-  width: fit-content;
-  margin: 5px;
+  width: 150px;
+  margin: 15px;
 }
 
 .logged-in a {
   display: inline-block;
   width: 4em;
-  margin: 0 5px;
   height: 4em;
 }
 
@@ -17,6 +16,12 @@
   height: 4em;
   width: 4em;
   border-radius: 2em;
+}
+
+.logged-in__section {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .logged-in__name {

@@ -24,3 +24,23 @@
 .booksid__nav-2 {
     margin-top: 3rem;
 }
+
+.review__saveorquit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 450px;
+}
+
+.review__about {
+  width: 450px;
+  height: 150px;
+}
+
+.review__rating {
+  margin: 20px 0;
+}
+
+.review__rating__numbers {
+  width: 100px;
+}
