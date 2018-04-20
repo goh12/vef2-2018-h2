@@ -18,12 +18,14 @@
 
 .profile__form__input {
   width: 500px;
+  max-width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
 .profile__form__input input {
   width: 300px;
+  max-width: 60%;
   height: 2em;
 }
 

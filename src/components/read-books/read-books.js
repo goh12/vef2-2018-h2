@@ -70,8 +70,8 @@ export default class ReadBooks extends Component {
               <React.Fragment key={book.id}>
               <li className='readbook'>
               <h3 className='readbook__title'>{book.title}</h3>
-              <p>Einkunn: {book.rating}</p>
-              <p>{book.review}</p>
+              <p className='readbook__text'>Einkunn: {book.rating}</p>
+              <p className='readbook__text'>Umsögn: {book.review}</p>
               {this.props.id === 'me' && (
                 <Button className='button--del' children='Eyða' onClick={async (e) => this.deleteReview(e, book.id)} />
               )}

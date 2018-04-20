@@ -5,3 +5,7 @@
 .readbook__title {
   text-decoration: underline;
 }
+
+.readbook__text {
+  font-weight: bold;
+}
