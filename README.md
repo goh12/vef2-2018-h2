@@ -8,7 +8,7 @@ Hópverkefni 2 snýst um að útbúa react framenda ofan á vefþjónustu úr h�
   * `npm start`
 
 ## Verkefni á Heroku
- * `https://vef2-2018-h2-ggf.herokuapp.com/`
+ * [https://vef2-2018-h2-ggf.herokuapp.com/](https://vef2-2018-h2-ggf.herokuapp.com/)
 
 ## Nöfn og notendanöfn allra í hóp
   * Frosti Grétarsson - frg17@hi.is
